@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/*
+  The Reggs Ltd — Dark Forest Luxury design system
+  Palette: Dark Forest Green, Olive Green, Warm Amber, Burnt Orange, Cream
+  (hex values are a working set derived from the named palette used across
+  Reggs Ltd outputs — adjust to exact brand hexes if you have official ones)
+*/
+@theme {
+  --color-forest: #0f2a1d;
+  --color-forest-light: #17402c;
+  --color-olive: #4a5320;
+  --color-amber: #d9a441;
+  --color-burnt: #b5502e;
+  --color-cream: #f6f1e4;
+
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "SF Pro Display", "Calibri", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-forest);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+#root {
+  min-height: 100svh;
+}
