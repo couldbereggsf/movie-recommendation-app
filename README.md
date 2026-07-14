@@ -18,10 +18,6 @@ This project is developed in phases, each landing as its own set of commits on `
 | Linting            | oxlint                                   |
 | CI/CD              | GitHub Actions → GitHub Pages            |
 
-## Brand
-
-Styled with The Reggs Ltd "Dark Forest Luxury" system: Dark Forest Green, Olive Green, Warm Amber, Burnt Orange, and Cream, set in Georgia (display) and SF Pro/Calibri (body). Theme tokens live in `src/index.css`.
-
 ## Project structure
 
 ```
@@ -39,7 +35,7 @@ src/
 
 ```bash
 npm install
-cp .env.example .env   # fill in your TMDB API key and Auth0 app credentials
+cp .env.example .env  
 npm run dev
 ```
 
