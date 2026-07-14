@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-/*
-  The Reggs Ltd — Dark Forest Luxury design system
-  Palette: Dark Forest Green, Olive Green, Warm Amber, Burnt Orange, Cream
-  (hex values are a working set derived from the named palette used across
-  Reggs Ltd outputs — adjust to exact brand hexes if you have official ones)
-*/
 @theme {
   --color-forest: #0f2a1d;
   --color-forest-light: #17402c;
