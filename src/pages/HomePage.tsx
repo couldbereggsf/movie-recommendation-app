@@ -4,6 +4,7 @@ import { Loader } from '../components/ui/Loader';
 import Footer from '../components/ui/Footer';
 import Membership from '../components/ui/Membership';
 import { useEffect, useState } from 'react';
+import MovieCarousel from '../components/ui/MovieCarousel';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -42,7 +43,12 @@ const HomePage = () => {
         return () => clearInterval(timer);
     }, []);
 
-
+    const scrollToMembership = () => {
+        const membershipSection = document.getElementById('membership-section');
+        if (membershipSection) {
+            membershipSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     // Mock stats (hardcoded for now, will be dynamic later)
     const stats = [
@@ -77,7 +83,7 @@ const HomePage = () => {
                         to="/movies"
                         className="inline-block px-8 py-4 bg-amber text-forest font-bold rounded-2xl shadow-lg hover:shadow-amber/30 hover:scale-105 transition-all duration-300"
                     >
-                        Browse Movies
+                        Browse All Movies
                     </Link>
                 </div>
 
@@ -163,7 +169,7 @@ const HomePage = () => {
                             Sign Up Free
                         </button>
                         <button 
-                            onClick={() => navigate('/about')}
+                            onClick={scrollToMembership}
                         className="px-6 py-3 border border-cream/30 text-cream rounded-2xl hover:bg-cream/10 hover:scale-105 transition-all duration-300">
                             Learn More
                         </button>

@@ -5,6 +5,7 @@ import TestPage from '../pages/TestPage';
 import HomePage from '../pages/HomePage';
 import SignUpPage from '../pages/SignUpPage';
 import AboutPage from '../pages/AboutPage';
+import LoginPage from '../pages/LoginPage';
 
 
 export const router = createBrowserRouter([
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
         element: <HomePage /> 
     },
     {
-        path: '/',
+        path: '/movies',
         element: <MovieListPage />,
     },
     {
@@ -32,4 +33,7 @@ export const router = createBrowserRouter([
         path: '/about', 
         element: <AboutPage /> 
     },
+    { 
+        path: '/login', 
+        element: <LoginPage /> },
 ]);

@@ -23,6 +23,6 @@ export const MovieList = ({ movies = [], onMovieClick }: Props) => {
             ))}
         </div>
     );
-};' '
+};
 
 export default MovieList;

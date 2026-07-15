@@ -34,3 +34,7 @@ h1, h2, h3, h4 {
 #root {
   min-height: 100svh;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

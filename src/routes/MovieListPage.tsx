@@ -33,15 +33,33 @@ const MovieListPage = () => {
         navigate(`/movie/${id}`);
     };
 
+    const handleGoHome = () => {
+        navigate('/');
+    };
+
     if (isLoading) return <Loader />;
     if (isError) return <p className="text-burnt">Failed to load movies.</p>;
 
     return (
         <div className="container mx-auto px-4 py-8">
+            {/* Back to Home button */}
+            <button
+                onClick={handleGoHome}
+                className="mb-6 text-cream/50 hover:text-cream transition-colors flex items-center gap-2"
+            >
+                ← Back to Home
+            </button>
+
             <div className="flex flex-col items-center gap-6 mb-8">
                 <SearchBar onSearch={handleSearch} initialQuery={query} />
             </div>
+
+            <h1 className="text-2xl font-display text-cream mb-6">
+                {query ? `Results for "${query}"` : 'All Movies'}
+            </h1>
+
             <MovieList movies={data?.results} onMovieClick={handleMovieClick} />
+
             {data && (
                 <Pagination
                     currentPage={data.page}
