@@ -6,12 +6,11 @@ import App from './App';
 import './index.css';
 import { Auth0ProviderWithRedirect } from './lib/auth0';
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Auth0ProviderWithRedirect>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </Auth0ProviderWithRedirect>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>
 );
