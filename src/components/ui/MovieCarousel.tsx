@@ -83,6 +83,9 @@ const MovieCarousel = ({ movies, title, subtitle, viewAllLink }: MovieCarouselPr
                                 alt={movie.title}
                                 className="w-full aspect-[2/3] object-cover"
                                 loading="lazy"
+                                onError={(e) => {
+                                    e.currentTarget.src = '/placeholder-poster.png'; // Adds a placeholder
+                                }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                 <p className="text-cream text-sm font-medium line-clamp-2">{movie.title}</p>

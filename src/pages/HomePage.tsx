@@ -2,9 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { usePopularMovies } from '../features/movies/hooks/useMovies';
 import { Loader } from '../components/ui/Loader';
 import Footer from '../components/ui/Footer';
-import Membership from '../components/ui/Membership';
 import { useEffect, useState } from 'react';
-import MovieCarousel from '../components/ui/MovieCarousel';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -43,27 +41,20 @@ const HomePage = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const scrollToMembership = () => {
-        const membershipSection = document.getElementById('membership-section');
-        if (membershipSection) {
-            membershipSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    // Mock stats (hardcoded for now, will be dynamic later)
+    // Live stats using animated count values
     const stats = [
-        { label: 'Movies in Database', value: '12,847' },
-        { label: 'Active Users', value: '4,892' },
-        { label: 'Ratings Submitted', value: '27,341' },
+        { label: 'Movies in Database', value: movieCount.toLocaleString() },
+        { label: 'Active Users', value: userCount.toLocaleString() },
+        { label: 'Ratings Submitted', value: ratingCount.toLocaleString() },
     ];
 
     // Mock staff picks (hardcoded for now)
     const staffPicks = [
-        { id: 1, title: 'Inception', year: 2010 },
-        { id: 2, title: 'The Matrix', year: 1999 },
-        { id: 3, title: 'Interstellar', year: 2014 },
-        { id: 4, title: 'The Dark Knight', year: 2008 },
-    ];
+        { id: 27205, title: 'Inception', year: 2010, poster_path: '/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg' },
+        { id: 603, title: 'The Matrix', year: 1999, poster_path: '/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg' },
+        { id: 157336, title: 'Interstellar', year: 2014, poster_path: '/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg' },
+        { id: 155, title: 'The Dark Knight', year: 2008, poster_path: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg' },
+      ];
 
     return (
         <div className="min-h-svh bg-forest">
@@ -77,7 +68,9 @@ const HomePage = () => {
                         CineMatch
                     </h1>
                     <p className="font-body text-cream/70 max-w-2xl mx-auto text-lg mb-8">
-                        Discover your next favorite movie. Curated recommendations, staff picks, and a community of film lovers.
+                        Discover your next favorite movie. 
+                        <br />
+                        Curated recommendations, staff picks, and a community of film lovers.
                     </p>
                     <Link
                         to="/movies"
@@ -118,7 +111,7 @@ const HomePage = () => {
                                     <img
                                         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                                         alt={movie.title}
-                                        className="w-full aspect-[2/3] object-cover"
+                                        className="w-full aspect-2/3 object-cover"
                                         loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
@@ -130,28 +123,40 @@ const HomePage = () => {
                     )}
                 </div>
             </section>
-
             {/* Staff Picks */}
             <section className="py-12 px-4 bg-forest-light/20">
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-2xl md:text-3xl font-display text-cream mb-6">
                         ⭐ Staff Picks
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {staffPicks.map((movie) => (
-                            <div
+                            <Link
                                 key={movie.id}
-                                className="bg-forest-light/40 p-6 rounded-2xl border border-cream/10 hover:border-amber/30 transition-all duration-300"
+                                to={`/movie/${movie.id}`}
+                                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-amber/20 hover:scale-105 transition-all duration-300"
                             >
-                                <h3 className="text-cream font-bold text-lg">{movie.title}</h3>
-                                <p className="text-cream/50 text-sm">{movie.year}</p>
-                                <p className="text-cream/70 text-sm mt-2">⭐ Recommended by our team</p>
-                            </div>
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                                    alt={movie.title}
+                                    className="w-full aspect-2/3 object-cover"
+                                    loading="lazy"
+                                    onError={(e) => {
+                                        e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="300" viewBox="0 0 200 300"%3E%3Crect fill="%23333" width="200" height="300"/%3E%3Ctext x="50" y="150" fill="%23999" font-size="16" font-family="Arial"%3ENo Image%3C/text%3E%3C/svg%3E';
+                                    }}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <div>
+                                        <p className="text-cream font-bold text-sm line-clamp-1">{movie.title}</p>
+                                        <p className="text-cream/50 text-xs">{movie.year}</p>
+                                        <p className="text-amber text-xs mt-1 font-medium">⭐ Staff Pick</p>
+                                    </div>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
             </section>
-            <Membership />
 
             {/* Call to Action */}
             <section className="py-16 px-4 text-center bg-gradient-to-t from-forest-light/20 to-transparent">
@@ -169,7 +174,7 @@ const HomePage = () => {
                             Sign Up Free
                         </button>
                         <button 
-                            onClick={scrollToMembership}
+                            onClick={() => navigate('/about')}
                         className="px-6 py-3 border border-cream/30 text-cream rounded-2xl hover:bg-cream/10 hover:scale-105 transition-all duration-300">
                             Learn More
                         </button>
