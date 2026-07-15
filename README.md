@@ -50,9 +50,9 @@ npm run dev
 ## Build phases
 
 - [x] **Phase 1** — Project scaffolding, brand theme, repo/branch setup
-- [ ] **Phase 2** — TMDB data-fetching service with caching
-- [ ] **Phase 3** — Auth0 authentication
-- [ ] **Phase 4** — Movie list, search, pagination, loaders (UI)
+- [x] **Phase 2** — TMDB data-fetching service with caching
+- [x] **Phase 3** — Auth0 authentication
+- [x] **Phase 4** — Movie list, search, pagination, loaders (UI)
 - [ ] **Phase 5** — Movie details view (cast, crew, ratings)
 - [ ] **Phase 6** — State management wiring
 - [ ] **Phase 7** — CI/CD: lint + test pipeline, auto-deploy to GitHub Pages
