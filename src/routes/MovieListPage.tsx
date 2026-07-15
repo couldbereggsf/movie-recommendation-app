@@ -45,7 +45,7 @@ const MovieListPage = () => {
             {data && (
                 <Pagination
                     currentPage={data.page}
-                    totalPages={data.total_pages}
+                    totalPages={Math.min(data.total_pages, 500)}
                     onPageChange={handlePageChange}
                 />
             )}
