@@ -1,18 +1,31 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useMovieDetails } from '../features/movies/hooks/useMovies';
 import { Loader } from '../components/ui/Loader';
 import { Link } from 'react-router-dom';
 import { useMovieStore } from '../store/movieStore';
 
-export const MovieDetailsPage = () => {
+
+    const MovieDetailsPage = () => {
     const { toggleFavorite, isFavorite } = useMovieStore();
     const { id } = useParams<{ id: string }>();
     const movieId = Number(id);
-    const favorited = isFavorite(movieId);
     const { data: movie, isLoading, isError } = useMovieDetails(movieId);
 
+    const favorited = isFavorite(movieId);
+
     if (isLoading) return <Loader />;
-    if (isError || !movie) return <p className="text-burnt">Movie not found.</p>;
+        if (isError) return <p className="text-burnt text-center py-8">Failed to load movie details.</p>;
+    if (!movie) return <p className="text-cream/70 text-center py-8">Movie not found.</p>;
+
+    const genres = movie.genres?.map((g: any) => g.name).join(' • ') || 'N/A';
+    const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
+    const runtime = movie.runtime ? `${movie.runtime}min` : 'N/A';
+    const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+
+    const handleFavoriteToggle = () => {
+        toggleFavorite(movieId);
+    };
+
 
     const posterUrl = movie.poster_path
         ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
@@ -74,14 +87,27 @@ export const MovieDetailsPage = () => {
                             </div>
                         </div>
                     )}
+                    <button
+                        onClick={handleFavoriteToggle}
+                        className={`
+        group relative px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300
+        ${favorited
+                                ? 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-300 border-2 border-rose-400/50 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-500/20'
+                                : 'bg-gradient-to-r from-amber-500 to-amber-600 text-forest border-2 border-amber-400/50 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105'
+                            }
+        flex items-center gap-3
+    `}
+                    >
+                        <span className="text-xl">
+                            {favorited ? '❤️' : '🤍'}
+                        </span>
+                        <span>
+                            {favorited ? 'Remove from Favorites' : 'Add to Favorites'}
+                        </span>
+                    </button>
                 </div>
-                <button
-                    onClick={() => toggleFavorite(Number(id))}
-                    className="px-6 py-3 rounded-xl bg-amber text-forest font-bold hover:scale-105 transition-all"
-                >
-                    {favorited ? '❤️ Remove from Favorites' : '🤍 Add to Favorites'}
-                </button>
             </div>
         </div>
     );
 };
+export default MovieDetailsPage;
