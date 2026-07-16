@@ -45,7 +45,7 @@ import { useMovieStore } from '../store/movieStore';
                     </div>
                     <p className="mt-4 text-cream/90">{movie.overview}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {movie.genres?.map((g) => (
+                        {movie.genres?.map((g: any) => (
                             <span key={g.id} className="px-3 py-1 bg-olive rounded-full text-xs text-cream">
                                 {g.name}
                             </span>
@@ -56,7 +56,7 @@ import { useMovieStore } from '../store/movieStore';
                         <div className="mt-6">
                             <h2 className="text-2xl font-display text-amber">Cast</h2>
                             <div className="flex overflow-x-auto gap-4 py-4">
-                                {movie.credits.cast.slice(0, 10).map((member) => (
+                                {movie.credits.cast.slice(0, 10).map((member: any) => (
                                     <div key={member.id} className="flex-shrink-0 w-24 text-center">
                                         <img
                                             src={
@@ -79,7 +79,7 @@ import { useMovieStore } from '../store/movieStore';
                         <div className="mt-6">
                             <h2 className="text-2xl font-display text-amber">Crew</h2>
                             <div className="flex flex-wrap gap-4 mt-2">
-                                {movie.credits.crew.filter(m => m.job === 'Director').map((member) => (
+                                {movie.credits.crew.filter((m: any) => m.job === 'Director').map((member: any) => (
                                     <div key={member.id} className="text-cream">
                                         <span className="font-bold">{member.name}</span> — {member.job}
                                     </div>

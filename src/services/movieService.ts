@@ -1,5 +1,8 @@
 import { apiClient } from './apiClient';
 
+
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 export interface Movie {
     id: number;
     title: string;
@@ -38,14 +41,34 @@ export interface ApiResponse<T> {
     total_pages: number;
     total_results: number;
 }
-
 export const movieService = {
-    getPopular: (page = 1) =>
-        apiClient.get<ApiResponse<Movie>>('/movie/popular', { params: { page } }),
+    getPopular: (page: number = 1) => {
+        return fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            });
+    },
 
-    searchMovies: (query: string, page = 1) =>
-        apiClient.get<ApiResponse<Movie>>('/search/movie', { params: { query, page } }),
+    searchMovies: (query: string, page: number = 1) => {
+        return fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            });
+    },
 
-    getMovieDetails: (id: number) =>
-        apiClient.get<MovieDetails>(`/movie/${id}`, { params: { append_to_response: 'credits' } }),
-};
+    getMovieDetails: (id: number) => {
+        return fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            });
+    },
+  };

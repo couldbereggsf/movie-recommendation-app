@@ -15,7 +15,7 @@ const MovieListPage = () => {
     const popularQuery = usePopularMovies(page);
     const searchQuery = useSearchMovies(query, page);
 
-    const { data, isLoading, isError } = query ? searchQuery : popularQuery;
+    const { data, isLoading, isError, error } = query ? searchQuery : popularQuery;
     console.log('MovieListPage data:', data);
 
     const handleSearch = (q: string) => {
@@ -38,7 +38,10 @@ const MovieListPage = () => {
     };
 
     if (isLoading) return <Loader />;
-    if (isError) return <p className="text-burnt">Failed to load movies.</p>;
+    if (isError) {
+        console.error('API Error:', error);
+        return <p className="text-burnt text-center py-8">Failed to load movies.</p>;
+    }
 
     return (
         <div className="container mx-auto px-4 py-8">
