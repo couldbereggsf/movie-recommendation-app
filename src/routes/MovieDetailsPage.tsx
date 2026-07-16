@@ -90,13 +90,13 @@ import { useMovieStore } from '../store/movieStore';
                     <button
                         onClick={handleFavoriteToggle}
                         className={`
-        group relative px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300
-        ${favorited
+    group relative px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300
+    ${favorited
                                 ? 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-300 border-2 border-rose-400/50 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-500/20'
                                 : 'bg-gradient-to-r from-amber-500 to-amber-600 text-forest border-2 border-amber-400/50 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105'
                             }
-        flex items-center gap-3
-    `}
+    flex items-center gap-3
+  `}
                     >
                         <span className="text-xl">
                             {favorited ? '❤️' : '🤍'}
