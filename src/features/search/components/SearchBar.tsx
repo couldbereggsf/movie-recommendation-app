@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
     initialQuery?: string;
+    favorites?: any[];
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '' }) => { 
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '', favorites = [] }) => { 
     const [query, setQuery] = useState(initialQuery);
 
     const handleSubmit = (e: React.FormEvent) => { // Prevent the default form submission behavior
@@ -26,7 +28,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '' }) =>
                 placeholder="Search movies..."
                 className="flex-1 px-4 py-2 rounded bg-forest-light text-cream border border-olive focus:outline-none focus:border-amber"
             />
-            <div className="absolute right-1 top-1 flex gap-1">
+            <div className="absolute right-1 top-1 flex gap-1 items-center">
+                <Link
+                    to="/favorites"
+                    className="relative px-2 py-2 text-cream/60 hover:text-cream transition-colors flex items-center gap-1"
+                    title="View Favorites"
+                >
+                    ❤️
+                    {favorites.length > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-amber text-forest text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                            {favorites.length}
+                        </span>
+                    )}
+                </Link>
                 {query && (
           <button
             type="button"

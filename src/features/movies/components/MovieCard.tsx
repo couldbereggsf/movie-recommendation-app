@@ -24,15 +24,6 @@ export const MovieCard = ({ movie, onClick }: Props) => {
                 <p className="text-sm text-amber">{movie.release_date?.slice(0, 4)}</p>
                 <p className="text-sm text-cream/80 line-clamp-3 mt-2">{movie.overview}</p>
             </div>
-            <button
-                onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(movie.id);
-                }}
-                className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-black/70 transition-colors z-10"
-            >
-                {favorited ? '❤️' : '🤍'}
-            </button>
         </div>
     );
 };
