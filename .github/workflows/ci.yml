@@ -19,3 +19,7 @@ jobs:
       - run: npm run lint
       - run: npm run test -- --run
       - run: npm run build
+    env:
+        VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+        VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
+        VITE_AUTH0_CLIENT_ID: ${{ secrets.VITE_AUTH0_CLIENT_ID }}
