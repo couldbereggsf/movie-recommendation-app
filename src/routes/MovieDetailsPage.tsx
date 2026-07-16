@@ -2,10 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useMovieDetails } from '../features/movies/hooks/useMovies';
 import { Loader } from '../components/ui/Loader';
 import { Link } from 'react-router-dom';
+import { useMovieStore } from '../store/movieStore';
 
 export const MovieDetailsPage = () => {
+    const { toggleFavorite, isFavorite } = useMovieStore();
     const { id } = useParams<{ id: string }>();
     const movieId = Number(id);
+    const favorited = isFavorite(movieId);
     const { data: movie, isLoading, isError } = useMovieDetails(movieId);
 
     if (isLoading) return <Loader />;
@@ -72,6 +75,12 @@ export const MovieDetailsPage = () => {
                         </div>
                     )}
                 </div>
+                <button
+                    onClick={() => toggleFavorite(Number(id))}
+                    className="px-6 py-3 rounded-xl bg-amber text-forest font-bold hover:scale-105 transition-all"
+                >
+                    {favorited ? '❤️ Remove from Favorites' : '🤍 Add to Favorites'}
+                </button>
             </div>
         </div>
     );

@@ -5,16 +5,16 @@ interface SearchBarProps {
     initialQuery?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '' }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '' }) => { 
     const [query, setQuery] = useState(initialQuery);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => { // Prevent the default form submission behavior
         e.preventDefault();
         onSearch(query);
     };
     const handleClear = () => {
         setQuery('');
-        onSearch(''); // Reset search with empty query
+        onSearch(''); // Call onSearch with an empty string to clear the search results
       };
 
     return (

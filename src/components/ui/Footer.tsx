@@ -29,8 +29,11 @@ const Footer = () => {
                     <div>
                         <h4 className="text-cream font-bold mb-2">Quick Links</h4>
                         <ul className="space-y-1 text-cream/50 text-sm">
-                            <li><Link to="/movies" className="hover:text-cream transition-colors">Browse Movies</Link></li>
                             <li><Link to="/" className="hover:text-cream transition-colors">Home</Link></li>
+                            <li><Link to="/favorites" className="hover:text-cream/60 transition-colors">
+                                ❤️ Favorites
+                            </Link></li>
+                            <li><Link to="/movies" className="hover:text-cream transition-colors">Browse Movies</Link></li>
                         </ul>
                     </div>
                     <div>
