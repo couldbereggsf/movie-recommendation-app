@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useMovieDetails } from '../features/movies/hooks/useMovies';
 import { Loader } from '../components/ui/Loader';
 import { Link } from 'react-router-dom';
@@ -17,10 +17,6 @@ import { useMovieStore } from '../store/movieStore';
         if (isError) return <p className="text-burnt text-center py-8">Failed to load movie details.</p>;
     if (!movie) return <p className="text-cream/70 text-center py-8">Movie not found.</p>;
 
-    const genres = movie.genres?.map((g: any) => g.name).join(' • ') || 'N/A';
-    const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
-    const runtime = movie.runtime ? `${movie.runtime}min` : 'N/A';
-    const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
 
     const handleFavoriteToggle = () => {
         toggleFavorite(movieId);

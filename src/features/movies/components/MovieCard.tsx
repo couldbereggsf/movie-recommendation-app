@@ -1,5 +1,5 @@
 import type { Movie } from '../../../services/movieService';
-import { useMovieStore } from '../../../store/movieStore';
+//import { useMovieStore } from '../../../store/movieStore';
 
 interface Props {
     movie: Movie;
@@ -7,8 +7,8 @@ interface Props {
 }
 
 export const MovieCard = ({ movie, onClick }: Props) => {
-    const { toggleFavorite, isFavorite } = useMovieStore();
-    const favorited = isFavorite(movie.id);
+    //const { toggleFavorite, isFavorite } = useMovieStore();
+    //const favorited = isFavorite(movie.id);
     const posterUrl = movie.poster_path
         ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
         : '/placeholder-poster.png';
