@@ -3,6 +3,7 @@ import { usePopularMovies } from '../features/movies/hooks/useMovies';
 import { Loader } from '../components/ui/Loader';
 import Footer from '../components/ui/Footer';
 import { useEffect, useState } from 'react';
+import type { Movie } from '../types/movie';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -102,7 +103,7 @@ const HomePage = () => {
                         <Loader />
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            {data?.results?.slice(0, 6).map((movie: any) => (
+                            {data?.results?.slice(0, 6).map((movie: Movie) => (
                                 <Link
                                     key={movie.id}
                                     to={`/movie/${movie.id}`}

@@ -7,16 +7,7 @@ import SignUpPage from '../pages/SignUpPage';
 import AboutPage from '../pages/AboutPage';
 import LoginPage from '../pages/LoginPage';
 import FavoritesPage from '../pages/FavoritesPage';
-
-
-const ErrorFallback = () => (
-    <div className="min-h-svh bg-forest flex items-center justify-center px-4">
-        <div className="text-center">
-            <h1 className="text-4xl font-display text-cream mb-4">Oops!</h1>
-            <p className="text-cream/70">Something went wrong. Please try again later.</p>
-        </div>
-    </div>
-  );
+import ErrorFallback from '../components/ui/ErrorFallback';
 
 export const router = createBrowserRouter([
     { 

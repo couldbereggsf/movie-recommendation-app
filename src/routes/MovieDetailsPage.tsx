@@ -4,8 +4,7 @@ import { Loader } from '../components/ui/Loader';
 import { Link } from 'react-router-dom';
 import { useMovieStore } from '../store/movieStore';
 
-
-    const MovieDetailsPage = () => {
+const MovieDetailsPage = () => {
     const { toggleFavorite, isFavorite } = useMovieStore();
     const { id } = useParams<{ id: string }>();
     const movieId = Number(id);
@@ -41,7 +40,7 @@ import { useMovieStore } from '../store/movieStore';
                     </div>
                     <p className="mt-4 text-cream/90">{movie.overview}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                        {movie.genres?.map((g: any) => (
+                        {movie.genres?.map((g: { id: number; name: string }) => (
                             <span key={g.id} className="px-3 py-1 bg-olive rounded-full text-xs text-cream">
                                 {g.name}
                             </span>
@@ -52,8 +51,8 @@ import { useMovieStore } from '../store/movieStore';
                         <div className="mt-6">
                             <h2 className="text-2xl font-display text-amber">Cast</h2>
                             <div className="flex overflow-x-auto gap-4 py-4">
-                                {movie.credits.cast.slice(0, 10).map((member: any) => (
-                                    <div key={member.id} className="flex-shrink-0 w-24 text-center">
+                                {movie.credits.cast.slice(0, 10).map((member: { id: number; name: string; profile_path: string; character: string }) => (
+                                    <div key={member.id} className="shrink-0 w-24 text-center">
                                         <img
                                             src={
                                                 member.profile_path
@@ -75,7 +74,7 @@ import { useMovieStore } from '../store/movieStore';
                         <div className="mt-6">
                             <h2 className="text-2xl font-display text-amber">Crew</h2>
                             <div className="flex flex-wrap gap-4 mt-2">
-                                {movie.credits.crew.filter((m: any) => m.job === 'Director').map((member: any) => (
+                                {movie.credits.crew.filter((m: { job: string }) => m.job === 'Director').map((member: { id: number; name: string; job: string }) => (
                                     <div key={member.id} className="text-cream">
                                         <span className="font-bold">{member.name}</span> — {member.job}
                                     </div>
@@ -88,8 +87,8 @@ import { useMovieStore } from '../store/movieStore';
                         className={`
     group relative px-8 py-4 rounded-2xl font-bold text-base transition-all duration-300
     ${favorited
-                                ? 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-300 border-2 border-rose-400/50 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-500/20'
-                                : 'bg-gradient-to-r from-amber-500 to-amber-600 text-forest border-2 border-amber-400/50 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105'
+                                ? 'bg-linear-to-r from-rose-500/20 to-rose-600/20 text-rose-300 border-2 border-rose-400/50 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-500/20'
+                                : 'bg-linear-to-r from-amber-500 to-amber-600 text-forest border-2 border-amber-400/50 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/30 hover:scale-105'
                             }
     flex items-center gap-3
   `}

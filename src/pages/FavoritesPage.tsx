@@ -3,6 +3,7 @@ import { usePopularMovies } from '../features/movies/hooks/useMovies';
 import { MovieList } from '../features/movies/components/MovieList';
 import { Loader } from '../components/ui/Loader';
 import { useNavigate } from 'react-router-dom';
+import { type Movie } from '../types/movie';
 
 const FavoritesPage = () => {
     const { favorites } = useMovieStore();
@@ -11,7 +12,7 @@ const FavoritesPage = () => {
     // Fetches all movies (or use a hook that fetches by IDs)
     const { data, isLoading } = usePopularMovies(1);
 
-    const favoriteMovies = data?.results?.filter((movie: any) =>
+    const favoriteMovies = data?.results?.filter((movie: Movie) =>
         favorites.includes(movie.id)
     ) || [];
 

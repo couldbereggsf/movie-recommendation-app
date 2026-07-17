@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import type { Movie } from '../../../types/movie';
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
     initialQuery?: string;
-    favorites?: any[];
+    favorites?: Movie[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '', favorites = [] }) => { 
