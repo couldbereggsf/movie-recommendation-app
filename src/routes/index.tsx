@@ -40,5 +40,7 @@ export const router = createBrowserRouter([
     { 
         path: '/favorites', 
         element: <FavoritesPage />, 
-    },
-]);
+    }
+], {
+    basename: '/movie-recommendation-app',
+});
