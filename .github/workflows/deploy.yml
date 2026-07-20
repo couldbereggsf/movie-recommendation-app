@@ -17,19 +17,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+
       - run: npm ci --legacy-peer-deps
+
+      # Debug: Show environment variables (masked)
+      - name: Debug env vars
+        run: |
+          echo "VITE_TMDB_API_KEY is ${{ secrets.VITE_TMDB_API_KEY && 'set' || 'NOT set' }}"
+          echo "VITE_AUTH0_DOMAIN is ${{ secrets.VITE_AUTH0_DOMAIN && 'set' || 'NOT set' }}"
+          echo "VITE_AUTH0_CLIENT_ID is ${{ secrets.VITE_AUTH0_CLIENT_ID && 'set' || 'NOT set' }}"
+
       - run: npm run build
         env:
           VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
           VITE_AUTH0_DOMAIN: ${{ secrets.VITE_AUTH0_DOMAIN }}
           VITE_AUTH0_CLIENT_ID: ${{ secrets.VITE_AUTH0_CLIENT_ID }}
+
+      # Debug: List dist folder contents
+      - name: List dist contents
+        run: ls -la dist/
+
+      # Ensure .nojekyll and _redirects exist in dist
+      - name: Ensure required files
+        run: |
+          touch dist/.nojekyll
+          echo "/* /index.html 200" > dist/_redirects
+          ls -la dist/
+
       - uses: actions/configure-pages@v4
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
       - uses: actions/deploy-pages@v4
         id: deployment
