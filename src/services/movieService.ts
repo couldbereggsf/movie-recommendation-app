@@ -1,8 +1,11 @@
 //import { apiClient } from './apiClient';
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
+if (!API_KEY) {
+  console.error('❌ VITE_TMDB_API_KEY is missing!');
+}
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 export interface Movie {
     id: number;
     title: string;
@@ -46,17 +49,25 @@ export const movieService = {
         return fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`)
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                    console.error('TMDB API error:', res.status, res.statusText);
+                    return res.text().then(text => {
+                        console.error('Error body:', text);
+                        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                    });
                 }
                 return res.json();
             });
-    },
+              },
 
     searchMovies: (query: string, page: number = 1) => {
         return fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`)
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                    console.error('TMDB API error:', res.status, res.statusText);
+                    return res.text().then(text => {
+                        console.error('Error body:', text);
+                        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                    });
                 }
                 return res.json();
             });
@@ -66,9 +77,13 @@ export const movieService = {
         return fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits`)
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                    console.error('TMDB API error:', res.status, res.statusText);
+                    return res.text().then(text => {
+                        console.error('Error body:', text);
+                        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                    });
                 }
                 return res.json();
             });
     },
-  };
+};
