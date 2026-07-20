@@ -11,7 +11,14 @@ console.log('VITE_TMDB_API_KEY:', import.meta.env.VITE_TMDB_API_KEY ? '✅ DEFIN
 console.log('VITE_AUTH0_DOMAIN:', import.meta.env.VITE_AUTH0_DOMAIN ? '✅ DEFINED' : '❌ MISSING');
 console.log('VITE_AUTH0_CLIENT_ID:', import.meta.env.VITE_AUTH0_CLIENT_ID ? '✅ DEFINED' : '❌ MISSING');
 
+// Global error logging
+window.addEventListener('error', (event) => {
+  console.error('🔴 Global error:', event.error || event.message);
+});
 
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('🔴 Unhandled rejection:', event.reason);
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
